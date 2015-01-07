@@ -1,0 +1,18 @@
+---
+title: CLRS2015
+output: word_document
+author: Brian A. Fannin and Daniel Murphy
+---
+
+
+Reproducible, Self-Documenting Actuarial Analysis with RMarkdown
+========
+
+RMarkdown is a tool which provides two great benefits to an actuary
+
+1. Literate programming - The documentation of analysis becomes a part of the analysis itself
+2. Reproducibility - The analysis may be reproduced by someone other than the original author
+
+Spreadsheets - most actuaries’ software of choice - suffer from many shortcomings, among them the fact that the analysis is often described in an environment (e.g., Word or PowerPoint) separate from where it takes place (e.g., Excel). The actuary must constantly update several documents to ensure consistency between exhibits and the narrative which supports them. Further, text which clarifies the intent and operation of complex calculations is either difficult to find or absent.<!--- is that because the software is a spreadsheet or because the actuary finds creating that text to be difficult?---> The attendant operating risk is obvious.<!--- I believe the greater op risk arises from inevitable formula errors that are easier to miss in a spreadsheet than in a self-documenting analytical environment such as R.---> In addition, there is a lost opportunity to meet the emerging requirements of auditors, management, and regimes like Solvency II, which demand that analysis be fully documented.
+
+RMarkdown is a technology which has emerged in the R community to support reproducibility of complex analysis and packaging of results in a variety of formats such as HTML, PDF and MSWord. This session will explore the benefits of using RMarkdown as part of an actuary's workflow. The session will walk through a examples in the context of a reserve analysis.<!---thought we’d put it that way in case we came up with our own examples--->
