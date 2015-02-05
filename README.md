@@ -1,11 +1,41 @@
 CLRS2015
 ========
 
-RMarkdown is a tool which provides two great benefits to an actuary
+RMarkdown and Git for Collaborative Actuarial Research and Analysis
+--------
 
-1. Literate programming - The documentation of analysis becomes a part of the analysis itself.
-2. Reproducibility - The analysis may be reproduced by someone other than the original author
+Collaboration between actuaries presents
+certain hurdles, including
+reproducibility of shared results,
+updating documentation, and
+file sharing and versioning. 
+This session will discuss two open-source tools that help 
+overcome these hurdles:
+RMarkdown and git.
 
-Spreadsheets suffer from many shortcomings, among them the fact that the analysis is often described in an environment separate from where it takes place. The actuary must constantly update several documents to ensure consistency between exhibits and the narrative which discusses them. Further, text which clarifies the intent and operation of complex calculations is either difficult to find or absent. The attendant operating risk is obvious. In addition, there is a lost opportunity to meet the emerging requirements of regimes like Solvency II, which demand that analysis be fully documented.
+RMarkdown provides two great benefits to an actuary
 
-This session will explore the benefits of using RMarkdown as part of an actuary's workflow. RMarkdown is a technology which has emerged in the R community to support reproducibility of complex analysis and packaging of results in a variey of formats such as HTML, PDF and MSWord. The session will walk through a complete example of a reserve analysis
+1. Literate programming -- The documentation of the analysis becomes 
+integrated with the analysis itself
+2. Reproducibility -- The analysis may be reproduced by someone other than 
+the original author
+
+When actuaries use spreadsheets (e.g., Excel), 
+the documentation is usually in a different environment 
+(e.g., Word or PowerPoint). 
+The actuary must constantly update several documents to ensure consistency 
+between exhibits and the narrative which supports them. 
+Text which clarifies the intent and operation of complex calculations 
+is often difficult to find or absent.
+This creates operating risk to the actuary and the Principal, 
+as well as lost opportunity to both in meeting the emerging requirements of 
+auditors, management, and regulatory regimes such as Solvency II.
+
+Git, invented by Linus Torvalds to handle development of his more
+famous software, Linux, has become the most widely used
+version control system for software development.
+Graphical user interfaces (GUIs) have made git more accessible to
+less technical folks, 
+and its Windows implementation is almost "magical."
+
+The session will walk through examples in the context of a reserve analysis.
