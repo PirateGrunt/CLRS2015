@@ -1,45 +1,18 @@
 ---
-title: "CLRS2015"
-author: "Brian A. Fannin, Daniel Murphy, and Kirsten Singer"
+title: CLRS2015
 output: word_document
+author: Brian A. Fannin and Daniel Murphy
 ---
 
 
-Two Tools for Collaborative Actuarial Analysis
+Reproducible, Self-Documenting Actuarial Analysis with RMarkdown
 ========
-
-Collaboration between actuaries presents
-certain hurdles, including
-file sharing and versioning, 
-reproducibility of shared results, and
-updating documentation.
-This session will discuss two open-source tools that are becoming
-de-facto standards for overcoming these hurdles:
-git and RMarkdown.
-
-Git, invented by Linus Torvalds to handle development of his more
-famous software, Linux, has become the most widely used
-version control system for software development.
-Graphical user interfaces (GUIs) have made git more accessible to
-less technical folks, 
-and its Windows implementation is almost "magical."
 
 RMarkdown is a tool which provides two great benefits to an actuary
 
-1. Literate programming -- The documentation of the analysis becomes 
-integrated with the analysis itself
-2. Reproducibility -- The analysis may be reproduced by someone other than 
-the original author
+1. Literate programming - The documentation of analysis becomes a part of the analysis itself
+2. Reproducibility - The analysis may be reproduced by someone other than the original author
 
-When actuaries use spreadsheets (e.g., Excel), 
-the documentation is usually in a different environment 
-(e.g., Word or PowerPoint). 
-The actuary must constantly update several documents to ensure consistency 
-between exhibits and the narrative which supports them. 
-Text which clarifies the intent and operation of complex calculations 
-is often difficult to find or absent.
-This creates operating risk to the actuary and the Principal, 
-as well as lost opportunity to both in meeting the emerging requirements of 
-auditors, management, and regulatory regimes such as Solvency II.
+Spreadsheets - most actuaries’ software of choice - suffer from many shortcomings, among them the fact that the analysis is often described in an environment (e.g., Word or PowerPoint) separate from where it takes place (e.g., Excel). The actuary must constantly update several documents to ensure consistency between exhibits and the narrative which supports them. Further, text which clarifies the intent and operation of complex calculations is either difficult to find or absent.<!--- is that because the software is a spreadsheet or because the actuary finds creating that text to be difficult?---> The attendant operating risk is obvious.<!--- I believe the greater op risk arises from inevitable formula errors that are easier to miss in a spreadsheet than in a self-documenting analytical environment such as R.---> In addition, there is a lost opportunity to meet the emerging requirements of auditors, management, and regimes like Solvency II, which demand that analysis be fully documented.
 
-The session will walk through examples in the context of a reserve analysis.
+RMarkdown is a technology which has emerged in the R community to support reproducibility of complex analysis and packaging of results in a variety of formats such as HTML, PDF and MSWord. This session will explore the benefits of using RMarkdown as part of an actuary's workflow. The session will walk through a examples in the context of a reserve analysis.<!---thought we’d put it that way in case we came up with our own examples--->
