@@ -1,11 +1,11 @@
 ---
 title: "CLRS2015"
 author: "Brian A. Fannin, Daniel Murphy, and Kirsten Singer"
-output: pdf_document
+output: word_document
 ---
 
 
-RMarkdown and Git for Collaborative Actuarial Analysis
+RMarkdown and Git for Collaborative Actuarial Research and Analysis
 ========
 
 Collaboration between actuaries presents
