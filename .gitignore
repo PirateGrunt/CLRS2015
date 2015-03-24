@@ -10,3 +10,10 @@
 # RStudio files
 .Rproj.user/
 .Rproj.user
+
+SampleProject/data/gather/*.docx
+SampleProject/data/process/*.docx
+SampleProject/analysis/*.docx
+
+*.csv
+*.rda
