@@ -1,0 +1,25 @@
+---
+title: Process CAS data
+output: word_document
+---
+
+```{r }
+# put some knitr options here
+```
+
+```{r }
+library(pander)
+```
+
+## Overview
+
+The data is altered from its raw form as follows:
+
+* Change column X -> Y
+* Add column name for line of business
+* Bind data frames using `rbind`
+
+The data frame schema is as follows: 
+```{r results='asis'}
+pandoc.table()
+```

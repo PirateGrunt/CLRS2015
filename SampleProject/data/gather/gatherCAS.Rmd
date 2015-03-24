@@ -1,0 +1,55 @@
+---
+output: word_document
+---
+
+```{r knitrOpts, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, verbose = FALSE)
+```
+
+```{r SupportLibs}
+library(pander)
+```
+
+This file will gather product liability and other liability reserving data from the CAS' website.
+
+```{r fetch}
+FetchDataSet <- function(stub){
+  URL.stem = "http://www.casact.org/research/reserve_data/"
+  URL <- paste0(URL.stem, stub, "_pos.csv")
+  df <- read.csv(URL, stringsAsFactors = FALSE)
+}
+
+datasets <- c("prodliab", "othliab")
+
+lstSets <- lapply(datasets, FetchDataSet)
+names(lstSets) <- datasets
+
+```
+
+```{r results='asis'}
+dfSample <- lstSets[[1]]
+dfDataDict <- data.frame(cbind(names(dfSample)
+                    , sapply(dfSample, typeof)
+                    , sapply(dfSample, class)))
+names(dfDataDict) <- c("Column", "Type", "Class")
+row.names(dfDataDict) <- NULL
+pandoc.table(dfDataDict, style='simple')
+```
+
+```{r save}
+SaveDataSet <- function(df, outputDir, name){
+  assign(name, df)
+  filename <- paste0(outputDir, name, ".rda")
+  save(list=name, file = filename, compress = "xz")
+  
+  filename <- paste0(outputDir, name, ".csv")
+  write.csv(name, filename, row.names=FALSE)
+}
+
+invisible(
+  mapply(lstSets, FUN = SaveDataSet, outputDir = "../raw/", name = names(lstSets)) 
+  )
+```
+
+This file was run on `r Sys.time()`.
