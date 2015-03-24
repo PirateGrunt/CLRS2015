@@ -29,3 +29,9 @@ $(PROCESS_DIR)/%.docx:$(PROCESS_DIR)/%.Rmd
 
 $(ANALYSIS_DIR)/%.docx:$(ANALYSIS_DIR)/%.Rmd
 	$(KNIT) "require(rmarkdown); render('$<', word_document())"
+
+clean:
+	rm -fv $(GATHER_OUT)
+	rm -fv $(PROCESS_OUT)
+	rm -fv $(ANALYSIS_OUT)
+	
