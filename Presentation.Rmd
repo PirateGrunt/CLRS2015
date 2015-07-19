@@ -1,0 +1,50 @@
+---
+title: "Git and RMarkdown for Collaborative Actuarial Analysis"
+output: 
+  slidy_presentation:
+    duration: 45
+    footer: "Copyright (c) 2015, Daniel Murphy, Kirsten Singer, Brian A. Fannin"
+---
+
+## Introduction
+
+* Enterprise risk
+  * Multiple users and last minute requests make it difficult to change a document safely. Interim changes are lost.
+  * Research may be easily shared and reproduced.
+
+## Case studies
+
+* Duke study
+* Austerity vs. GDP (http://www.nber.org/papers/w15639.pdf)
+* Tibco acquisition (http://ww2.cfo.com/spreadsheets/2014/10/spreadsheet-error-costs-tibco-shareholders-100m/)
+
+## Git
+
+## What is git?
+
+* Invented by Linus Torvalds
+* Very popular
+* Permits all of the changes to be tracked in a structured way
+
+## Uses
+
+* Save stages of development of a model
+* Collaborate with colleague without losing your changes
+* Exchange data in the cloud
+
+## Live example
+
+## R Markdown
+
+![Gandrud](Gandrud.jpg)
+
+## What is R Markdown?
+
+* Markdown uses very simple formatting syntax to focus on text
+* RMarkdown embeds code with the text and places output into the document
+* Can render documents as HTML, PDF or DOCX
+* No need to copy and paste analysis or exhibits from Excel into Word
+
+## Live example
+
+# Conclusion
