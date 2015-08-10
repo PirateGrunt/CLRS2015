@@ -50,10 +50,12 @@ the tail would be
 `r tail(cumprod(exp(0.9045 - 0.6340 * 10:109) + 1), 1)`.
 
 The selected tail is therefore 1.01.
+In addition, select the simple average link ratio for the 1-2 period.
 Here is the cumulative loss development pattern:
 
 ``` {r, echo = FALSE}
 tail = 1.01
+selectedATA[1] <- attr(ataRAA, 'smpl')[1]
 CDF <- round(cumprod(rev(c(selectedATA, tail))), 3)
 CDF
 ```
