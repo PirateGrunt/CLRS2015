@@ -1,0 +1,72 @@
+---
+title: "LDF Method Example"
+author: "CLRS Concurrent Session #___"
+date: "Thursday, September 10, 2015"
+output: html_document
+---
+
+# Estimate ultimate loss from the RAA data
+
+Load the ChainLadder package and view the RAA triangle.
+
+```{r}
+suppressPackageStartupMessages(library(ChainLadder))
+RAA
+```
+
+Form the triangle of age-to-age factors and 
+initially select the weighted average link ratios.
+
+```{r}
+ataRAA <- ata(RAA)
+ataRAA
+selectedATA <- round(attr(ataRAA, "vwtd"), 3)
+selectedATA
+```
+
+## Analyze Tail
+
+The average link ratios seem to follow a pattern.
+
+```{r}
+plot(log(selectedATA - 1))
+x <-1:9
+y <- log(selectedATA - 1)
+lm(y~x)
+abline(lm(y~x))
+```
+
+Assuming the pattern continues,
+what magnitude of tail is implied? 
+Investigate the next 10 years versus the next 100 years.
+
+```{r}
+age <- 10:19
+tail(cumprod(exp(0.9045 - 0.6340 * age) + 1), 1)
+```
+
+Over the next 100 years, 
+the tail would be
+`r tail(cumprod(exp(0.9045 - 0.6340 * 10:109) + 1), 1)`.
+
+The selected tail is therefore 1.01.
+Here is the cumulative loss development pattern:
+
+``` {r, echo = FALSE}
+tail = 1.01
+CDF <- round(cumprod(rev(c(selectedATA, tail))), 3)
+CDF
+```
+
+## Project to ultimate
+
+Here is the loss development estimate with those selections and a total:
+
+``` {r}
+LDEst <- data.frame(Latest = getLatestCumulative(RAA), CDF, 
+                    Ultimate = round(getLatestCumulative(RAA) * CDF, 0))
+Total <- colSums(LDEst)
+Total[2] <- NA
+rbind(LDEst, Sum = Total)
+```
+
