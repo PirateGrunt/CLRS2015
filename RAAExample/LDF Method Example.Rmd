@@ -1,13 +1,13 @@
 ---
 title: "LDF Method Example"
-author: "CLRS Concurrent Session #___"
+author: "CLRS 2015 Concurrent Session ST-6"
 date: "Thursday, September 10, 2015"
 output: html_document
 ---
 
-# Estimate ultimate loss from the RAA data
+# Actuarial Assignment: Estimate ultimate loss from the RAA data
 
-Load the ChainLadder package and view the RAA triangle.
+Load the ChainLadder package and view the RAA triangle (included therein).
 
 ```{r}
 suppressPackageStartupMessages(library(ChainLadder))
@@ -48,27 +48,41 @@ tail(cumprod(exp(0.9045 - 0.6340 * age) + 1), 1)
 Over the next 100 years, 
 the tail would be
 `r tail(cumprod(exp(0.9045 - 0.6340 * 10:109) + 1), 1)`.
+(Not shown. Homework problem!)
 
-The selected tail is therefore 1.01.
-In addition, select the simple average link ratio for the 1-2 period.
-Here is the cumulative loss development pattern:
+With that as justification, we select a tail factor of 1.010.
 
-``` {r, echo = FALSE}
+In addition, for illustration we 
+select the greater of the two calculated averages
+(the simple average) for the first link ratio.
+
+We now make all those assignments and 
+build the cumulative loss development pattern (CDF):
+
+``` {r}
 tail = 1.01
 selectedATA[1] <- attr(ataRAA, 'smpl')[1]
 CDF <- round(cumprod(rev(c(selectedATA, tail))), 3)
-CDF
+rbind(selectedATA = round(c(selectedATA, tail = tail), 3), 
+      CDF = rev(CDF))
 ```
 
 ## Project to ultimate
 
-Here is the loss development estimate with those selections and a total:
+Using the CDF vector, we develop the latest diagonal to ultimate. 
+We place all pertinent values,
+including totals,
+into a table that automatically appears in the documentation
+and, if desired, could be saved to a spreadsheet for later analysis.
 
 ``` {r}
-LDEst <- data.frame(Latest = getLatestCumulative(RAA), CDF, 
-                    Ultimate = round(getLatestCumulative(RAA) * CDF, 0))
-Total <- colSums(LDEst)
+Latest = getLatestCumulative(RAA)
+Ultimate = round(Latest * CDF, 0)
+IBNR = Ultimate - Latest
+LDEstimate <- data.frame(Latest, CDF, Ultimate, IBNR)
+Total <- colSums(LDEstimate)
 Total[2] <- NA
-rbind(LDEst, Sum = Total)
+LDEstimate <- rbind(LDEstimate, Total = Total)
+LDEstimate
 ```
 
