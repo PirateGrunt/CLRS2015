@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="CLRS Concurrent Session #___" />
+<meta name="author" content="CLRS 2015 Concurrent Session ST-6" />
 
 
 <title>LDF Method Example</title>
@@ -62,14 +62,14 @@ img {
 
 <div id="header">
 <h1 class="title">LDF Method Example</h1>
-<h4 class="author"><em>CLRS Concurrent Session #___</em></h4>
+<h4 class="author"><em>CLRS 2015 Concurrent Session ST-6</em></h4>
 <h4 class="date"><em>Thursday, September 10, 2015</em></h4>
 </div>
 
 
-<div id="estimate-ultimate-loss-from-the-raa-data" class="section level1">
-<h1>Estimate ultimate loss from the RAA data</h1>
-<p>Load the ChainLadder package and view the RAA triangle.</p>
+<div id="actuarial-assignment-estimate-ultimate-loss-from-the-raa-data" class="section level1">
+<h1>Actuarial Assignment: Estimate ultimate loss from the RAA data</h1>
+<p>Load the ChainLadder package and view the RAA triangle (included therein).</p>
 <pre class="r"><code>suppressPackageStartupMessages(library(ChainLadder))
 RAA</code></pre>
 <pre><code>##       dev
@@ -124,31 +124,42 @@ lm(y~x)</code></pre>
 <pre class="r"><code>age &lt;- 10:19
 tail(cumprod(exp(0.9045 - 0.6340 * age) + 1), 1)</code></pre>
 <pre><code>## [1] 1.009297</code></pre>
-<p>Over the next 100 years, the tail would be 1.0093137.</p>
-<p>The selected tail is therefore 1.01. In addition, select the simple average link ratio for the 1-2 period. Here is the cumulative loss development pattern:</p>
-<pre><code>##          9-10    8-9    7-8    6-7    5-6    4-5    3-4    2-3    1-2 
-##  1.010  1.019  1.036  1.071  1.116  1.242  1.455  1.850  3.004 24.649</code></pre>
+<p>Over the next 100 years, the tail would be 1.0093137. (Not shown. Homework problem!)</p>
+<p>With that as justification, we select a tail factor of 1.010.</p>
+<p>In addition, for illustration we select the greater of the two calculated averages (the simple average) for the first link ratio.</p>
+<p>We now make all those assignments and build the cumulative loss development pattern (CDF):</p>
+<pre class="r"><code>tail = 1.01
+selectedATA[1] &lt;- attr(ataRAA, 'smpl')[1]
+CDF &lt;- round(cumprod(rev(c(selectedATA, tail))), 3)
+rbind(selectedATA = round(c(selectedATA, tail = tail), 3), 
+      CDF = rev(CDF))</code></pre>
+<pre><code>##                1-2   2-3   3-4   4-5   5-6   6-7   7-8   8-9  9-10 tail
+## selectedATA  8.206 1.624 1.271 1.172 1.113 1.042 1.033 1.017 1.009 1.01
+## CDF         24.649 3.004 1.850 1.455 1.242 1.116 1.071 1.036 1.019 1.01</code></pre>
 </div>
 <div id="project-to-ultimate" class="section level2">
 <h2>Project to ultimate</h2>
-<p>Here is the loss development estimate with those selections and a total:</p>
-<pre class="r"><code>LDEst &lt;- data.frame(Latest = getLatestCumulative(RAA), CDF, 
-                    Ultimate = round(getLatestCumulative(RAA) * CDF, 0))
-Total &lt;- colSums(LDEst)
+<p>Using the CDF vector, we develop the latest diagonal to ultimate. We place all pertinent values, including totals, into a table that automatically appears in the documentation and, if desired, could be saved to a spreadsheet for later analysis.</p>
+<pre class="r"><code>Latest = getLatestCumulative(RAA)
+Ultimate = round(Latest * CDF, 0)
+IBNR = Ultimate - Latest
+LDEstimate &lt;- data.frame(Latest, CDF, Ultimate, IBNR)
+Total &lt;- colSums(LDEstimate)
 Total[2] &lt;- NA
-rbind(LDEst, Sum = Total)</code></pre>
-<pre><code>##      Latest    CDF Ultimate
-## 1981  18834  1.010    19022
-## 1982  16704  1.019    17021
-## 1983  23466  1.036    24311
-## 1984  27067  1.071    28989
-## 1985  26180  1.116    29217
-## 1986  15852  1.242    19688
-## 1987  12314  1.455    17917
-## 1988  13112  1.850    24257
-## 1989   5395  3.004    16207
-## 1990   2063 24.649    50851
-## Sum  160987     NA   247480</code></pre>
+LDEstimate &lt;- rbind(LDEstimate, Total = Total)
+LDEstimate</code></pre>
+<pre><code>##       Latest    CDF Ultimate  IBNR
+## 1981   18834  1.010    19022   188
+## 1982   16704  1.019    17021   317
+## 1983   23466  1.036    24311   845
+## 1984   27067  1.071    28989  1922
+## 1985   26180  1.116    29217  3037
+## 1986   15852  1.242    19688  3836
+## 1987   12314  1.455    17917  5603
+## 1988   13112  1.850    24257 11145
+## 1989    5395  3.004    16207 10812
+## 1990    2063 24.649    50851 48788
+## Total 160987     NA   247480 86493</code></pre>
 </div>
 </div>
 
