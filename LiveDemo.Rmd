@@ -1,0 +1,13 @@
+---
+title: "CLRS Demo"
+author: "Jane Actuary"
+date: "September 10, 2015"
+output: html_document
+---
+
+```{r }
+library(ChainLadder)
+RAA
+plot(RAA)
+```
+

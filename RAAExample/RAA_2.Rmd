@@ -1,30 +1,27 @@
 ---
-title: "LDF Method Example"
-author: "CLRS Concurrent Session #___"
+title: "Analysis of RAA loss data"
+author: "CLRS Concurrent Session"
 date: "Thursday, September 10, 2015"
-output: html_document
+output: word_document
 ---
-
-# Estimate ultimate loss from the RAA data
 
 Load the ChainLadder package and view the RAA triangle.
 
-```{r}
-suppressPackageStartupMessages(library(ChainLadder))
+```{r message=FALSE}
+library(ChainLadder)
 RAA
 ```
 
-Form the triangle of age-to-age factors and 
-initially select the weighted average link ratios.
+Form the triangle of age-to-age factors and initially select the weighted average link ratios.
 
-```{r}
+```{r echo = FALSE}
 ataRAA <- ata(RAA)
 ataRAA
 selectedATA <- round(attr(ataRAA, "vwtd"), 3)
 selectedATA
 ```
 
-## Analyze Tail
+## Analyze tail
 
 The average link ratios seem to follow a pattern.
 
@@ -67,8 +64,6 @@ CDF
 
 ## Project to ultimate
 
-Here is the loss development estimate with those selections and a total:
-
 ``` {r}
 LDEst <- data.frame(Latest = getLatestCumulative(RAA), CDF, 
                     Ultimate = round(getLatestCumulative(RAA) * CDF, 0))
@@ -76,4 +71,3 @@ Total <- colSums(LDEst)
 Total[2] <- NA
 rbind(LDEst, Sum = Total)
 ```
-

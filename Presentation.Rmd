@@ -29,7 +29,7 @@ output:
 ## Uses
 
 * Save stages of development of a model
-* Collaborate with colleague without losing your changes
+* Collaborate with colleagues without losing your changes
 * Exchange data in the cloud
 
 ## Live example
@@ -40,11 +40,15 @@ output:
 
 ## What is R Markdown?
 
+
 * Markdown uses very simple formatting syntax to focus on text
 * RMarkdown embeds code with the text and places output into the document
 * Can render documents as HTML, PDF or DOCX
 * No need to copy and paste analysis or exhibits from Excel into Word
 
 ## Live example
+
+* Change the output format
+* Change the model assumption
 
 # Conclusion

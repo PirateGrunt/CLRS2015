@@ -1,0 +1,38 @@
+---
+title: "Analysis of RAA loss data"
+author: "CLRS Concurrent Session"
+date: "Thursday, September 10, 2015"
+output: html_document
+---
+
+Load the ChainLadder package and view the RAA triangle.
+
+```{r}
+library(ChainLadder)
+RAA
+```
+
+Form the triangle of age-to-age factors and initially select the weighted average link ratios.
+
+```{r echo = FALSE}
+ataRAA <- ata(RAA)
+ataRAA
+selectedATA <- round(attr(ataRAA, "vwtd"), 3)
+selectedATA
+```
+
+``` {r echo = FALSE}
+tail <- 1.05
+CDF <- round(cumprod(rev(c(selectedATA, tail))), 3)
+CDF
+```
+
+## Project to ultimate
+
+``` {r}
+LDEst <- data.frame(Latest = getLatestCumulative(RAA), CDF, 
+                    Ultimate = round(getLatestCumulative(RAA) * CDF, 0))
+Total <- colSums(LDEst)
+Total[2] <- NA
+rbind(LDEst, Sum = Total)
+```
